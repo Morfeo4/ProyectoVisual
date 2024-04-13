@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Mostrar Información del Cliente</title>
+    <link rel="stylesheet" href="~/Content/PersonaVista.css" />
+</head>
+<body>
+    <div>
+        <h3>Mostrar Información del Cliente</h3>
+        @using (Html.BeginForm("ObtenerClientePorNombre", "Home", FormMethod.Post))
+        {
+            <table>
+                <tr>
+                    <td><label>Nombre del Cliente:</label></td>
+                    <td><input type="text" name="nombreCliente" /></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="Mostrar Información" /></td>
+                </tr>
+            </table>
+        }
+    </div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Calcular Valor a Pagar por Servicios</title>
+    <link rel="stylesheet" href="~/Content/PersonaVista.css" />
+</head>
+<body>
+    <div>
+        <h3>Calcular Valor a Pagar por Servicios</h3>
+        @using (Html.BeginForm("CalcularValorPagarServicios", "Home", FormMethod.Post))
+        {
+            <table>
+                <tr>
+                    <td><label>Cédula del Cliente:</label></td>
+                    <td><input type="text" name="cedulaCliente" /></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="Calcular" /></td>
+                </tr>
+            </table>
+        }
+    </div>
+</body>
+</html>
+

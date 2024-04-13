@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Ingresar Nuevo Cliente</title>
+    <link rel="stylesheet" href="~/Content/PersonaVista.css" />
+</head>
+<body>
+    <div>
+        <h3>Ingresar Nuevo Cliente</h3>
+        @using (Html.BeginForm("IngresarCliente", "Home", FormMethod.Post))
+        {
+            <table>
+                <tr>
+                    <td><label>Nombre del Cliente:</label></td>
+                    <td><input type="text" name="NombreCliente" /></td>
+                </tr>
+                <tr>
+                    <td><label>Apellido:</label></td>
+                    <td><input type="text" name="Apellido" /></td>
+                </tr>
+                <tr>
+                    <td><label>Cédula:</label></td>
+                    <td><input type="text" name="Cedula" /></td>
+                </tr>
+                <tr>
+                    <td><label>Estrato:</label></td>
+                    <td><input type="number" name="Estrato" /></td>
+                </tr>
+                <tr>
+                    <td><label>Meta de Ahorro:</label></td>
+                    <td><input type="number" name="MetaAhorro" /></td>
+                </tr>
+                <tr>
+                    <td><label>Consumo de Energía:</label></td>
+                    <td><input type="number" name="ConsumoEnergia" /></td>
+                </tr>
+                <tr>
+                    <td><label>Promedio de Agua:</label></td>
+                    <td><input type="number" name="PromedioAgua" /></td>
+                </tr>
+                <tr>
+                    <td><label>Consumo de Agua:</label></td>
+                    <td><input type="number" name="ConsumoAgua" /></td>
+                </tr>
+                <tr>
+                    <td><label>Periodo de Consumo:</label></td>
+                    <td><input type="text" name="PeriodoDeConsumo" /></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="Ingresar Cliente" /></td>
+                </tr>
+            </table>
+        }
+    </div>
+</body>
+</html>
