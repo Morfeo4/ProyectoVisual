@@ -1,8 +1,18 @@
 ﻿@{
     ViewBag.Title = "404";
+    Layout = null;
 }
 
-<div class="jumbotron">
-    <h1>404</h1>
-
-</div>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Error 404</title>
+</head>
+<body>
+    <div style="text-align: center; margin-top: 100px;">
+        <h1>Error 404</h1>
+        <p>La pagina que estas buscando no pudo ser encontrada.</p>
+        <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Inicio</a>
+    </div>
+</body>
+</html>
