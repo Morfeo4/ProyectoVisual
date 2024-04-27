@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcular Valor a Pagar por Servicios</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Calcular Valor a Pagar por Servicios</h1>
+
+    <label for="cedulaCliente">Cédula del Cliente:</label>
+    <input type="text" id="cedulaCliente">
+    <button id="calcularBtn">Calcular</button>
+
+    <div id="resultado"></div>
+
+    <script>
+        $(document).ready(function () {
+            $('#calcularBtn').click(function () {
+                var cedulaCliente = $('#cedulaCliente').val();
+
+           
+                $.ajax({
+                    type: 'GET',
+                    url: '/Servicios/CalcularValorPagarServicios',
+                    data: { cedulaCliente: cedulaCliente },
+                    success: function(response) {
+                        $('#resultado').text('El valor total a pagar por servicios es: ' + response);
+                    },
+                    error: function() {
+                        $('#resultado').text('Error al calcular el valor total a pagar por servicios.');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+

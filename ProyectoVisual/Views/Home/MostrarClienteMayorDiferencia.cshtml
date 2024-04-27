@@ -1,0 +1,23 @@
+﻿@model TuProyecto.Models.Cliente
+
+@{
+    ViewBag.Title = "Mostrar Cliente con Mayor Diferencia";
+}
+
+<h2>Mostrar Cliente con Mayor Diferencia</h2>
+
+@if (ViewBag.Cliente != null)
+{
+    <div>
+        <h3>Información del Cliente:</h3>
+        <p>Nombre: @ViewBag.Cliente.Nombre</p>
+        <p>Apellido: @ViewBag.Cliente.Apellido</p>
+        <p>Cédula: @ViewBag.Cliente.Cedula</p>
+        <p>Cédula: @ViewBag.Cliente.Estrato</p>
+
+    </div>
+}
+else
+{
+    <p>No se encontró ningún cliente con mayor diferencia.</p>
+}

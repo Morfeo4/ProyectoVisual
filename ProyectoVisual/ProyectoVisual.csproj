@@ -120,6 +120,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -127,6 +128,7 @@
     <Compile Include="Models\Calcular.cs" />
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\Estadisticas.cs" />
+    <Compile Include="Models\EstadisticasAgua.cs" />
     <Compile Include="Models\GestionCliente.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -178,13 +180,24 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\ingresarCliente.cshtml" />
-    <Content Include="Views\Home\editarCliente.cshtml" />
-    <Content Include="Views\Home\eliminarCliente.cshtml" />
-    <Content Include="Views\Home\mostrarCliente.cshtml" />
-    <Content Include="Views\Home\calcularServicios.cshtml" />
-    <Content Include="Views\Home\promedioEnergia.cshtml" />
+    <Content Include="Views\Home\IngresarCliente.cshtml" />
+    <Content Include="Views\Home\EditarInformacionCliente.cshtml" />
+    <Content Include="Views\Home\EliminarCliente.cshtml" />
+    <Content Include="Views\Home\MostrarClientesss.cshtml" />
+    <Content Include="Views\Home\CalcularValorPagarServicios.cshtml" />
+    <Content Include="Views\Home\CalcularPromedioConsumoEnergia.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\CalcularTotalDescuentos.cshtml" />
+    <Content Include="Views\Home\CalcularExcesoAgua.cshtml" />
+    <Content Include="Views\Home\ContabilizarClientesMayorPromedioAgua.cshtml" />
+    <Content Include="Views\Home\MostrarPorcentajesConsumoAguaPorEstrato.cshtml" />
+    <Content Include="Views\Home\MostrarClienteMayorDiferencia.cshtml" />
+    <Content Include="Views\Home\MostrarEstratoMayorAhorroAgua.cshtml" />
+    <Content Include="Views\Home\MostrarEstratoMayorMenorConsumoEnergia.cshtml" />
+    <Content Include="Views\Home\MostrarValorTotalPagar.cshtml" />
+    <Content Include="Views\Home\MostrarClienteMayorConsumoAguaPorPeriodo.cshtml" />
+    <Content Include="Views\Error\Error404.cshtml" />
+    <Content Include="Views\Error\ErrorGeneral.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "Porcentajes de Consumo de Agua por Estrato";
+}
+
+<h2>Porcentajes de Consumo de Agua por Estrato</h2>
+
+<div>
+    @foreach (var porcentaje in ViewBag.Porcentajes)
+    {
+        <p>Estrato @porcentaje.Estrato: @porcentaje.Porcentaje%</p>
+    }
+</div>
+

@@ -22,10 +22,13 @@ namespace ProyectoVisual.Models
         {
             return ListaClientes;
         }
-
+        public Cliente MostrarClientePorNombre(string nombreCliente)
+        {
+            return ListaClientes.FirstOrDefault(c => c.Nombre == nombreCliente);
+        }
         public void IngresarNuevoCliente(Cliente nuevoCliente)
         {
-            // Aquí podrías agregar lógica para validar el nuevo cliente antes de agregarlo a la lista
+  
             SumatoriaConsumoEnergia += nuevoCliente.ConsumoEnergia;
             ListaClientes.Add(nuevoCliente);
         }
@@ -37,11 +40,11 @@ namespace ProyectoVisual.Models
 
         public void EditarInformacionCliente(Cliente clienteEditado)
         {
-            // Aquí podrías agregar lógica para validar la edición del cliente antes de actualizarlo en la lista
+
             var clienteExistente = ListaClientes.Find(c => c.Nombre == clienteEditado.Nombre);
             if (clienteExistente != null)
             {
-                // Actualizar los datos del cliente existente con los datos del cliente editado
+
                 clienteExistente.Apellido = clienteEditado.Apellido;
                 clienteExistente.Cedula = clienteEditado.Cedula;
                 clienteExistente.Estrato = clienteEditado.Estrato;

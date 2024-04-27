@@ -1,25 +1,29 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <title>Eliminar Cliente</title>
-    <link rel="stylesheet" href="~/Content/PersonaVista.css" />
-</head>
-<body>
+﻿@{
+    ViewBag.Title = "Eliminar Cliente";
+}
+
+<h2>Eliminar Cliente</h2>
+
+<form id="eliminarClienteForm" action="@Url.Action("EliminarCliente", "Cliente")" method="post">
     <div>
-        <h3>Eliminar Cliente</h3>
-        @using (Html.BeginForm("EliminarCliente", "Home", FormMethod.Post))
-        {
-            <table>
-                <tr>
-                    <td><label>Nombre del Cliente:</label></td>
-                    <td><input type="text" name="NombreCliente" /></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td><input type="submit" value="Eliminar Cliente" /></td>
-                </tr>
-            </table>
-        }
+        <label for="nombreCliente">Nombre del Cliente:</label>
+        <input type="text" id="nombreCliente" name="nombreCliente" required>
     </div>
-</body>
-</html>
+    <button type="submit" onclick="return confirm('¿Estás seguro de que quieres eliminar este cliente?')">Eliminar</button>
+</form>
+
+<div id="mensaje">
+    @if (TempData["Mensaje"] != null)
+    {
+        <p>@TempData["Mensaje"]</p>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        var mensaje = document.getElementById('mensaje').textContent;
+        if (mensaje) {
+            alert(mensaje);
+        }
+    </script>
+}

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Web;
 using System.Web.Mvc;
 
@@ -21,19 +22,15 @@ namespace ProyectoVisual.Controllers
             return View();
         }
 
+
         [HttpPost]
         public ActionResult IngresarCliente(Cliente cliente)
         {
             gestionCliente.IngresarNuevoCliente(cliente);
-            return RedirectToAction("Index");
+            ViewBag.Mensaje = "Cliente ingresado correctamente";
+         
+            return View("IngresarCliente");
         }
-
-        public ActionResult MostrarClientes()
-        {
-            var clientes = gestionCliente.ObtenerClientes();
-            return View(clientes);
-        }
-
 
         public ActionResult ObtenerClientePorNombre(string nombreCliente)
         {
@@ -49,45 +46,80 @@ namespace ProyectoVisual.Controllers
             }
         }
 
-        public void EditarInformacionCliente(Cliente clienteEditado)
+        [HttpPost]
+        public ActionResult EditarInformacionCliente(Cliente clienteEditado)
         {
-            // Aquí podrías agregar lógica para validar la edición del cliente antes de actualizarlo en la lista
-            var clienteExistente = gestionCliente.ObtenerClientePorNombre(clienteEditado.Nombre);
+            gestionCliente.EditarInformacionCliente(clienteEditado);
 
-            if (clienteExistente != null)
-            {
-                // Actualizar los datos del cliente existente con los datos del cliente editado
-                clienteExistente.Apellido = clienteEditado.Apellido;
-                clienteExistente.Cedula = clienteEditado.Cedula;
-                clienteExistente.Estrato = clienteEditado.Estrato;
-                clienteExistente.MetaAhorro = clienteEditado.MetaAhorro;
-                clienteExistente.ConsumoEnergia = clienteEditado.ConsumoEnergia;
-                clienteExistente.PromedioAgua = clienteEditado.PromedioAgua;
-                clienteExistente.ConsumoAgua = clienteEditado.ConsumoAgua;
-                clienteExistente.PeriodoDeConsumo = clienteEditado.PeriodoDeConsumo;
-            }
+            
+            return RedirectToAction("EditarInformacion");
         }
 
-        public void EliminarCliente(string nombreCliente)
+
+        [HttpPost]
+        public ActionResult EliminarCliente(string nombreCliente)
         {
-            var clienteEliminar = gestionCliente.ObtenerClientePorNombre(nombreCliente);
+        
+            var clienteEliminar = GestionCliente.ListaClientes.Find(c => c.Nombre == nombreCliente);
+
 
             if (clienteEliminar != null)
             {
                 GestionCliente.ListaClientes.Remove(clienteEliminar);
+
+                return RedirectToAction("ClienteEliminado");
+            }
+            else
+            {
+      
+                return RedirectToAction("ClienteNoEncontrado");
             }
         }
 
+
+
+        [HttpGet]
         public ActionResult CalcularValorPagarServicios(int cedulaCliente)
         {
-            double valorServicios = Calcular.CalcularValorPagarServicios(cedulaCliente);
-            return Content(valorServicios.ToString());
+
+            double valorTotal = CalcularValor(cedulaCliente);
+
+  
+            return Json(valorTotal, JsonRequestBehavior.AllowGet);
+        }
+
+        private double CalcularValor(int cedulaCliente)
+        {
+     
+            double valorServicios = 0.0;
+
+            return valorServicios;
         }
 
         public ActionResult CalcularPromedioConsumoEnergia()
         {
-            double promedio = Calcular.CalcularPromedioConsumoEnergia();
-            return Content(promedio.ToString());
+            double promedioConsumoGeneral = CalcularPromedio();
+
+            
+            ViewBag.PromedioConsumoEnergia = promedioConsumoGeneral;
+
+           
+            return View();
+        }
+
+        private double CalcularPromedio()
+        {
+
+            double sumatoriaConsumoEnergia = 0;
+
+            foreach (Cliente cliente in GestionCliente.ListaClientes)
+            {
+                sumatoriaConsumoEnergia += cliente.ConsumoEnergia;
+            }
+
+      
+            double promedioConsumoGeneral = sumatoriaConsumoEnergia / GestionCliente.ListaClientes.Count;
+            return promedioConsumoGeneral;
         }
 
         public ActionResult CalcularTotalDescuentos()
@@ -110,7 +142,7 @@ namespace ProyectoVisual.Controllers
 
         public ActionResult MostrarPorcentajesConsumoAguaPorEstrato()
         {
-            var porcentajes = Estadisticas.CalcularPorcentajesConsumoAguaPorEstrato(gestionCliente.ObtenerClientes());
+            var porcentajes = EstadisticasAgua.CalcularPorcentajesConsumoAguaPorEstrato(gestionCliente.ObtenerClientes());
             return View(porcentajes);
         }
 
@@ -122,7 +154,7 @@ namespace ProyectoVisual.Controllers
 
         public ActionResult MostrarEstratoMayorAhorroAgua()
         {
-            var estrato = Estadisticas.EncontrarEstratoMayorAhorroAgua(gestionCliente.ObtenerClientes());
+            var estrato = EstadisticasAgua.EncontrarEstratoMayorAhorroAgua(gestionCliente.ObtenerClientes());
             return View(estrato);
         }
 
@@ -140,10 +172,11 @@ namespace ProyectoVisual.Controllers
 
         public ActionResult MostrarClienteMayorConsumoAguaPorPeriodo(int periodoCliente)
         {
-            var cliente = Estadisticas.EncontrarClienteMayorConsumoAguaPorPeriodo(gestionCliente.ObtenerClientes(), periodoCliente);
+            var cliente = EstadisticasAgua.EncontrarClienteMayorConsumoAguaPorPeriodo(gestionCliente.ObtenerClientes(), periodoCliente);
             return View(cliente);
         }
 
     }
 
+  
 }

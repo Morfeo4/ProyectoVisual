@@ -1,0 +1,44 @@
+﻿<form id="editarClienteForm" action="/Home/EditarInformacionCliente" method="post" style="display: none;">
+    <fieldset>
+        <legend>Actualizar Datos del Cliente</legend>
+        <div>
+            <label for="CedulaEditar">Cédula:</label>
+            <input type="number" id="CedulaEditar" name="Cedula" required>
+        </div>
+        <div>
+            <label for="NombreEditar">Nombre:</label>
+            <input type="text" id="NombreEditar" name="Nombre" required>
+        </div>
+        <div>
+            <label for="ApellidoEditar">Apellido:</label>
+            <input type="text" id="ApellidoEditar" name="Apellido" required>
+        </div>
+        <div>
+            <label for="EstratoEditar">Estrato:</label>
+            <input type="number" id="EstratoEditar" name="Estrato" required>
+        </div>
+        <div>
+            <label for="MetaAhorroEditar">Meta de Ahorro:</label>
+            <input type="number" id="MetaAhorroEditar" name="MetaAhorro" required>
+        </div>
+        <div>
+            <label for="ConsumoEnergiaEditar">Consumo de Energía:</label>
+            <input type="number" id="ConsumoEnergiaEditar" name="ConsumoEnergia" required>
+        </div>
+        <div>
+            <label for="ConsumoAguaEditar">Consumo de Agua:</label>
+            <input type="number" id="ConsumoAguaEditar" name="ConsumoAgua" required>
+        </div>
+        <div>
+            <label for="PromedioAguaEditar">Promedio de Agua:</label>
+            <input type="number" id="PromedioAguaEditar" name="PromedioAgua" required>
+        </div>
+        <div>
+            <label for="PeriodoDeConsumoEditar">Periodo de Consumo:</label>
+            <input type="text" id="PeriodoDeConsumoEditar" name="PeriodoDeConsumo" required>
+        </div>
+        <p>
+            <input type="submit" value="Guardar Cambios">
+        </p>
+    </fieldset>
+</form>

@@ -1,48 +1,185 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    @RenderBody()
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menú</title>
+    <style>
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+            nav ul li {
+                display: inline;
+                margin-right: 10px;
+            }
+
+        .boton {
+            display: inline-block;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: #333;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+            .boton:hover {
+                background-color: #e0e0e0;
+            }
+
+        .menu-vertical {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+            .menu-vertical li {
+                display: block;
+                margin: 5px 0;
+            }
+
+        .menu-horizontal li:hover .menu-vertical {
+            display: block;
+        }
+    </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
-        <div class="container">
-            @Html.ActionLink("Nombre de la aplicación", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Alternar navegación" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Acerca de", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Contacto", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Ingresar Cliente", "IngresarCliente", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Editar Cliente", "EditarCliente", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Eliminar Cliente", "EliminarCliente", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Mostrar Información del Cliente", "MostrarClientes", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Calcular Valor a Pagar por Servicios", "CalcularValorPagarServicios", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Calcular Promedio de Consumo de Energía", "CalcularPromedioConsumoEnergia", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                </ul>
-                
-            </div>
-        </div>
-    </nav>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
-        </footer>
-    </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    <p>Bienvenido a EPM</p>
+
+    <nav>
+        <ul class="menu-horizontal">
+            <li>
+                <div class="boton">
+                    <a href="#">Cliente</a>
+                    <ul class="menu-vertical">
+                        <li><div class="boton" id="agregarClienteBtn"><a href="#">Agregar Cliente</a></div></li>
+                        <li><div class="boton" id="editarClienteBtn"><a href="#">Actualizar Datos</a></div></li>
+                        <li>
+                            <div class="boton" id="eliminarClienteBtn">
+                                <a href="#">Eliminar Cliente</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <div class="boton">
+                    <a href="#">Calcular</a>
+                    <ul class="menu-vertical">
+                        <li><a href="#" id="totalAPagarBtn">Total a Pagar</a></li>
+                        <li><div class="boton"><a href="#">Total Descuentos</a></div></li>
+                        <li><div class="boton"><a href="#">Valor Total a Pagar a la Empresa</a></div></li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <div class="boton">
+                    <a href="#">Estadísticas</a>
+                    <ul class="menu-vertical">
+                        <li><a href="#" id="promedioConsumoEnergiaBtn">Promedio Consumo Energía</a></li>
+                        <li><div class="boton" id="estratoMayorMenorBtn"><a href="#">Estrato Mayor y Menor Consumo Energía</a></div></li>
+                        <li><div class="boton"><a href="#">Estrato Mayor Ahorro Agua</a></div></li>
+                        <li><div class="boton"><a href="#">Clientes con Consumo de Agua Mayor al Promedio</a></div></li>
+                        <li><div class="boton"><a href="#">Porcentaje de Consumo Excesivo de Agua por Estrato</a></div></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <form id="clienteForm" action="/Home/IngresarCliente" method="post" style="display: none;">
+        <fieldset>
+            <legend>Datos del Cliente</legend>
+          
+            <p>
+                <input type="submit" value="Agregar Cliente">
+            </p>
+        </fieldset>
+    </form>
+
+    <script>
+       
+        document.getElementById('agregarClienteBtn').addEventListener('click', function () {
+            var formulario = document.getElementById('clienteForm');
+            if (formulario.style.display === 'none') {
+                formulario.style.display = 'block';
+            } else {
+                formulario.style.display = 'none';
+            }
+        });
+    </script>
+    <form id="editarClienteForm" action="/Home/EditarInformacionCliente" method="post" style="display: none;">
+        <fieldset>
+            <legend>Editar Información del Cliente</legend>
+          
+            <p>
+                <input type="submit" value="Guardar Cambios">
+            </p>
+        </fieldset>
+    </form>
+    <script>
+        
+        document.getElementById('editarClienteBtn').addEventListener('click', function () {
+            var formularioEdicion = document.getElementById('editarClienteForm');
+            if (formularioEdicion.style.display === 'none') {
+                formularioEdicion.style.display = 'block';
+            } else {
+                formularioEdicion.style.display = 'none';
+            }
+        });
+    </script>
+
+    <div id="resultadoPromedio"></div>
+
+    <script>
+    
+        document.getElementById('promedioConsumoEnergiaBtn').addEventListener('click', function () {
+         
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/Home/CalcularPromedioConsumoEnergia', true);
+            xhr.onload = function () {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                   
+                    document.getElementById('resultadoPromedio').innerHTML = xhr.responseText;
+                } else {
+                    console.error('Error al calcular el promedio de consumo de energía');
+                }
+            };
+            xhr.onerror = function () {
+                console.error('Error al comunicarse con el servidor');
+            };
+            xhr.send();
+        });
+    </script>
+    <div id="resultadoEstrato"></div>
+
+    <script>
+       
+        document.getElementById('estratoMayorMenorBtn').addEventListener('click', function () {
+      
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/Home/CalcularEstratoMayorMenorConsumoEnergia', true);
+            xhr.onload = function () {
+                if (xhr.status >= 200 && xhr.status < 300) {
+              
+                    document.getElementById('resultadoEstrato').innerHTML = xhr.responseText;
+                } else {
+                    console.error('Error al calcular el estrato mayor y menor consumo de energía');
+                }
+            };
+            xhr.onerror = function () {
+                console.error('Error al comunicarse con el servidor');
+            };
+            xhr.send();
+        });
+    </script>
 
 </body>
 </html>
